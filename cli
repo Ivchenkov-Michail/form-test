@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_NAME="${0##*/}"
+CMD="${1-}"
+ARG="${2-}"
+
+print_help() {
+  cat <<EOF
+$SCRIPT_NAME - Helper CLI for managing Docker Compose environments
+
+Usage:
+  $SCRIPT_NAME <command> [options]
+
+Commands:
+  up-dev [--no-build]
+      Build and start the development environment in the foreground.
+      Uses: docker-compose.yaml + docker-compose.dev.yml
+
+  up-prod [--no-build]
+      Build and start the production environment in the background (detached).
+      Uses: docker-compose.yaml + docker-compose.prod.yml
+
+  down-dev
+      Stop and remove development containers, networks, and related resources.
+
+  down-prod
+      Stop and remove production containers, networks, and related resources.
+
+  help
+      Show this help message.
+
+Options:
+  --no-build   Do not build images before starting containers (only for up-* commands).
+
+Examples:
+  $SCRIPT_NAME up-dev
+  $SCRIPT_NAME up-dev --no-build
+  $SCRIPT_NAME up-prod
+  $SCRIPT_NAME up-prod --no-build
+  $SCRIPT_NAME down-dev
+  $SCRIPT_NAME down-prod
+
+EOF
+}
+
+# Default for up-* is --build; allow overriding with --no-build
+UP_ARGS=("--build")
+if [[ "$ARG" == "--no-build" ]]; then
+  UP_ARGS=("--no-build")
+fi
+
+if [[ -z "$CMD" || "$CMD" == "help" || "$CMD" == "-h" || "$CMD" == "--help" ]]; then
+  print_help
+  exit 0
+fi
+
+case "$CMD" in
+  up-dev)
+    echo "[cli] Starting development environment (docker-compose.yaml + docker-compose.dev.yml)..."
+    docker compose -f docker-compose.yaml -f docker-compose.dev.yml up "${UP_ARGS[@]}" -d
+    ;;
+
+  up-prod)
+    echo "[cli] Starting production environment in detached mode (docker-compose.yaml + docker-compose.prod.yml)..."
+    docker compose -f docker-compose.yaml -f docker-compose.prod.yml up "${UP_ARGS[@]}" -d
+    ;;
+
+  down-dev)
+    echo "[cli] Stopping development environment..."
+    docker compose -f docker-compose.yaml -f docker-compose.dev.yml down
+    ;;
+
+  down-prod)
+    echo "[cli] Stopping production environment..."
+    docker compose -f docker-compose.yaml -f docker-compose.prod.yml down
+    ;;
+
+  *)
+    echo "[cli] Unknown command: '$CMD'" >&2
+    echo
+    print_help >&2
+    exit 1
+    ;;
+esac
