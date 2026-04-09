@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IMaskInput } from "react-imask";
 
 import styles from "@/app/page.module.scss";
 import { isRequiredField } from "@/utils/IsFieldRequired";
@@ -12,7 +13,6 @@ import { AppCheckbox } from "../ui/AppCheckbox";
 
 import { FormRow } from "./_components/FormRow";
 import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";
-
 
 type Option = {
   value: string;
@@ -134,17 +134,28 @@ export function RegisterForm() {
         label="Номер телефона"
         isRequired={isRequiredField(formSchema, "phone_number")}
       >
-        <input
-          {...register("phone_number")}
-          className={clsx(
-            styles.input,
-            errors.phone_number?.message && styles.inputError,
+        <Controller
+          name="phone_number"
+          control={control}
+          render={({ field }) => (
+            <IMaskInput
+              mask="+{7} (000) 000-00-00"
+              value={field.value ?? ""}
+              inputRef={field.ref}
+              onAccept={(value) => field.onChange(value)}
+              onBlur={field.onBlur}
+              placeholder="+7 (___) ___-__-__"
+              inputMode="tel"
+              className={clsx(
+                styles.input,
+                errors.phone_number?.message && styles.inputError,
+              )}
+            />
           )}
-          type="tel"
-          placeholder="+7 (***) ***‑**‑**"
         />
+
         {errors.phone_number?.message && (
-          <p className={styles.errorText}>{errors.phone_number?.message}</p>
+          <p className={styles.errorText}>{errors.phone_number.message}</p>
         )}
       </FormRow>
       <FormRow
