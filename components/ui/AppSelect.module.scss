@@ -5,6 +5,9 @@
   padding: 0 10px;
   box-sizing: content-box !important;
   border-radius: 2px;
+  @media (max-width: 768px) {
+    width: auto;
+  }
 }
 
 .control {
