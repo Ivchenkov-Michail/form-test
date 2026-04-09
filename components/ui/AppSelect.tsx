@@ -1,13 +1,13 @@
 "use client";
+
 import { useState } from "react";
-import { components, GroupBase, Props } from "react-select";
-import Select from "react-select";
+import Select, { components, GroupBase, Props } from "react-select";
 
 import ArrowIcon from "@/assets/icons/arrow.svg";
 
 import styles from "./AppSelect.module.scss";
 
-type CustomSelectProps<
+type AppSelectProps<
   Option,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>,
@@ -17,31 +17,40 @@ export function AppSelect<
   Option,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>,
->(props: CustomSelectProps<Option, IsMulti, Group>) {
+>(props: AppSelectProps<Option, IsMulti, Group>) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
   return (
-    <Select
+    <Select<Option, IsMulti, Group>
       {...props}
       components={{
         IndicatorSeparator: () => null,
-        DropdownIndicator: (props) => (
-          <components.DropdownIndicator {...props}>
+        DropdownIndicator: (indicatorProps) => (
+          <components.DropdownIndicator {...indicatorProps}>
             <ArrowIcon
               width={14}
               style={{ rotate: menuIsOpen ? "180deg" : "0deg" }}
             />
           </components.DropdownIndicator>
         ),
+        ...props.components,
       }}
       classNames={{
         container: () => styles.container,
         control: () => styles.control,
         dropdownIndicator: () => styles.dropdownIndicator,
         menu: () => styles.menu,
+        ...props.classNames,
       }}
-      menuIsOpen={menuIsOpen}
-      onMenuOpen={() => setMenuIsOpen(true)}
-      onMenuClose={() => setMenuIsOpen(false)}
+      menuIsOpen={props.menuIsOpen ?? menuIsOpen}
+      onMenuOpen={() => {
+        setMenuIsOpen(true);
+        props.onMenuOpen?.();
+      }}
+      onMenuClose={() => {
+        setMenuIsOpen(false);
+        props.onMenuClose?.();
+      }}
     />
   );
 }
