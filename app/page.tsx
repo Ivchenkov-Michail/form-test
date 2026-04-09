@@ -1,5 +1,5 @@
-import { FormTitle } from "@/components/FormTitle";
-import { RegisterForm } from "@/components/RegisterForm/RegisterForm";
+import { FormTitle } from "@/app/_components/FormTitle";
+import RegisterForm from "@/components/feature/RegisterForm";
 
 import styles from "./page.module.scss";
 
