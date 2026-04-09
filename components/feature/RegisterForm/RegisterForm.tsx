@@ -15,6 +15,8 @@ import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";
 import { FormFooter } from "./_components/FormFooter";
 import { type CityOption } from "./_lib/cities.query";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+
 export function RegisterForm({ cities }: { cities: CityOption[] }) {
   const {
     reset,
@@ -31,7 +33,39 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
   });
 
   const onSubmit = (data: FormValues) => {
-    console.log("Success: ", data);
+    const { confirm_password: _, ...submitData } = data;
+    const submitForm = async () => {
+      const res = await fetch(`${apiUrl}/register`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(submitData),
+      });
+      console.log("Success: ", res);
+      return res;
+    };
+    submitForm();
+
+    const now = new Date();
+    localStorage.setItem(
+      "register",
+      JSON.stringify({
+        name: submitData.name,
+        date:
+          "последние изменения " +
+          now.toLocaleDateString("ru-RU", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          }) +
+          " в " +
+          now.toLocaleTimeString("ru-RU", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+      }),
+    );
     reset();
   };
 

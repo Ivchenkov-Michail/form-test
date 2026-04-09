@@ -44,6 +44,10 @@ app.get("/cities", async (req, res) => {
     res.status(500).json({ message: "Ошибка при загрузке городов" });
   }
 });
+app.post("/register", (req, res) => {
+  console.log("Form data:", req.body);
+  return res.status(200).json({ message: "ok" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);

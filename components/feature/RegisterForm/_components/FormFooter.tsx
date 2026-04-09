@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Button } from "@/components/ui";
 
 import styles from "./FormFooter.module.scss";
@@ -6,6 +8,19 @@ type FormFooterProps = {
 };
 
 export function FormFooter({ isValid }: FormFooterProps) {
+  const [dateMessage] = useState(() => {
+    if (typeof window === "undefined") return "";
+
+    const raw = localStorage.getItem("register");
+    if (!raw) return "";
+
+    try {
+      const data = JSON.parse(raw);
+      return typeof data.date === "string" ? data.date : "";
+    } catch {
+      return "";
+    }
+  });
   return (
     <div className={styles.footer}>
       <span />
@@ -13,9 +28,7 @@ export function FormFooter({ isValid }: FormFooterProps) {
         <Button type="submit" disabled={!isValid}>
           Изменить
         </Button>
-        <p className={styles.updatedAt}>
-          последние изменения 15 мая 2024 в 14:55
-        </p>
+        <p className={styles.updatedAt}>{dateMessage}</p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import z from "zod";
 
 
-const apiUrl = process.env.BACKEND_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 const numberRegex = /^[1-9][0-9]*$/;
 
