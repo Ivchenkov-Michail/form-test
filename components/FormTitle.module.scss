@@ -7,10 +7,10 @@
   line-height: 100%;
   letter-spacing: 0%;
   margin-bottom: 40px;
-  color: #666666;
+  color: $secondary-text-color-1;
 
   span {
     font-weight: 700;
-    color: $text-color;
+    color: $primary-text-color;
   }
 }

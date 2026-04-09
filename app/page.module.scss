@@ -1,3 +1,5 @@
+@use "@/styles/variables" as *;
+
 .page {
   min-height: 100vh;
   padding: 40px 24px;
@@ -11,16 +13,6 @@
   width: 100%;
 }
 
-.title {
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 40px;
-
-  span {
-    font-weight: 700;
-  }
-}
-
 .form {
   font-size: 14px;
 }
@@ -29,8 +21,7 @@
   width: 100%;
   height: 31px;
   padding: 0 10px;
-  border: 1px solid #c4c4c4;
-  border-radius: 2px;
+  border: 1px solid $secondary-text-color-2;
   font-size: 14px;
   @media (max-width: 768px) {
     width: auto;
@@ -38,13 +29,13 @@
 }
 
 .inputError {
-  border-color: #e53935;
+  border-color: $error-color;
 }
 
 .errorText {
   margin-top: 4px;
   font-size: 12px;
-  color: #e53935;
+  color: $error-color;
 }
 
 .separator {
@@ -53,32 +44,8 @@
   background-color: #eeeeee;
 }
 
-.selectWrapper {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-.select {
-  @extend .input;
-  appearance: none;
-  padding-right: 32px;
-}
-
-.selectIcon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid #555;
-  border-bottom: 2px solid #555;
-  transform: translateY(-50%) rotate(45deg);
-  pointer-events: none;
-}
-
 .footer {
-  grid-template-columns: 180px minmax(0, 1fr) 260px;
+  grid-template-columns: 200px minmax(0, 1fr) 260px;
   align-items: flex-start;
   column-gap: 32px;
   margin-bottom: 24px;
@@ -98,23 +65,7 @@
   gap: 10px;
 }
 
-.submit {
-  min-width: 120px;
-  height: 40px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 4px;
-  background-color: #4caf50;
-  color: #ffffff;
-  font-size: 14px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #43a047;
-  }
-}
-
 .updatedAt {
   font-size: 12px;
-  color: #999999;
+  color: $secondary-text-color-1;
 }

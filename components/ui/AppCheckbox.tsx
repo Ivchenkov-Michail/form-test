@@ -4,6 +4,7 @@ import React, {
   InputHTMLAttributes,
   ReactNode,
 } from "react";
+import clsx from "clsx";
 
 import styles from "./AppCheckbox.module.scss";
 
@@ -51,7 +52,7 @@ export const AppCheckbox = forwardRef<HTMLInputElement, AppCheckboxProps>(
         <input
           ref={ref}
           type="checkbox"
-          className={[styles.checkbox, className].filter(Boolean).join(" ")}
+          className={clsx(styles.checkbox, className)}
           style={cssVars}
           id={id}
           {...props}

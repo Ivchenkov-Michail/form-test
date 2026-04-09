@@ -1,7 +1,9 @@
+@use "@/styles/variables" as *;
+
 .container {
   width: 100%;
   height: 31px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid $secondary-text-color-2;
   padding: 0 10px;
   box-sizing: content-box !important;
   border-radius: 2px;

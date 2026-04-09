@@ -144,7 +144,7 @@ export function RegisterForm() {
               inputRef={field.ref}
               onAccept={(value) => field.onChange(value)}
               onBlur={field.onBlur}
-              placeholder="+7 (___) ___-__-__"
+              placeholder="+7 (***) ***-**-**"
               inputMode="tel"
               className={clsx(
                 styles.input,
