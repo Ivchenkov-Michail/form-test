@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  border: 1px solid #c4c4c4;
+  padding: 0 10px;
+  box-sizing: content-box !important;
+  border-radius: 2px;
+}
+
+.control {
+  border: none !important;
+  box-shadow: none !important;
+  & > :first-child {
+    padding: 0px;
+  }
+}
+.dropdownIndicator {
+  padding: 8px 0px 8px 8px !important;
+}
+
+.menu {
+  left: 0;
+}

@@ -1,0 +1,16 @@
+@use "@/styles/variables" as *;
+
+.title {
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 40px;
+  color: #666666;
+
+  span {
+    font-weight: 700;
+    color: $text-color;
+  }
+}

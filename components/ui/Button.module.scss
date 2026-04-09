@@ -1,0 +1,15 @@
+.submit {
+  min-width: 120px;
+  height: 40px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #43a047;
+  }
+}

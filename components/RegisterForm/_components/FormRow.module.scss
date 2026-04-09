@@ -1,0 +1,27 @@
+.row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) 260px;
+  column-gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+}
+
+.label {
+  font-size: 16px;
+}
+
+.required {
+  color: #e53935;
+  margin-left: 3px;
+}
+
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
