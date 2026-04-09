@@ -13,22 +13,9 @@ import {
 import styles from "./RegisterForm.module.scss";
 import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";
 import { FormFooter } from "./_components/FormFooter";
+import { type CityOption } from "./_lib/cities.query";
 
-type Option = {
-  value: string;
-  label: string;
-};
-
-const town_options: Option[] = [
-  { value: "bryansk", label: "Брянск" },
-  { value: "smolensk", label: "Смоленск" },
-  { value: "kaluga", label: "Калуга" },
-  { value: "moskov", label: "Москва" },
-  { value: "voronej", label: "Воронеж" },
-  { value: "ural", label: "Урал" },
-];
-
-export function RegisterForm() {
+export function RegisterForm({ cities }: { cities: CityOption[] }) {
   const {
     reset,
     control,
@@ -39,7 +26,7 @@ export function RegisterForm() {
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      town: town_options[0].value,
+      town: "",
     },
   });
 
@@ -65,9 +52,10 @@ export function RegisterForm() {
             label="Ваш город"
             required={isRequiredField(formSchema, "town")}
             error={errors.town?.message}
-            value={town_options.find((o) => o.value === field.value) ?? null}
+            value={cities.find((o) => o.value === field.value) ?? null}
             onChange={(option) => field.onChange(option?.value ?? "")}
-            options={town_options}
+            options={cities}
+            placeholder="Выберите Город"
           />
         )}
       />
