@@ -1,3 +1,5 @@
 services:
   nextjs:
     container_name: nextjs-app
+  api:
+    container_name: express-api

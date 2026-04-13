@@ -10,3 +10,13 @@ services:
       PORT: 3000
       HOSTNAME: 0.0.0.0
     restart: unless-stopped
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: express-api
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
