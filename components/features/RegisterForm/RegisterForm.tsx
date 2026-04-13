@@ -16,7 +16,7 @@ import styles from "./RegisterForm.module.scss";
 import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";
 import { FormFooter } from "./_components/FormFooter";
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL_CLIENT;
 
 export function RegisterForm({ cities }: { cities: CityOption[] }) {
   const {
