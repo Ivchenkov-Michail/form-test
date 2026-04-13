@@ -24,7 +24,7 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
     control,
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<FormInput, unknown, FormValues>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -159,7 +159,7 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
           />
         )}
       />
-      <FormFooter isValid={isValid} />
+      <FormFooter isDisabled={!isValid} isSubmitting={isSubmitting} />
     </form>
   );
 }

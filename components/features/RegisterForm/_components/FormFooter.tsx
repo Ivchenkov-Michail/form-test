@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-import { Button } from "@/components/shared/ui";
+import { Button, Spinner } from "@/components/shared/ui";
 
 import styles from "./FormFooter.module.scss";
 type FormFooterProps = {
-  isValid: boolean;
+  isDisabled: boolean;
+  isSubmitting: boolean;
 };
 
-export function FormFooter({ isValid }: FormFooterProps) {
+export function FormFooter({ isDisabled, isSubmitting }: FormFooterProps) {
   const [dateMessage] = useState(() => {
     if (typeof window === "undefined") return "";
 
@@ -25,8 +26,8 @@ export function FormFooter({ isValid }: FormFooterProps) {
     <div className={styles.footer}>
       <span />
       <div className={styles.footerContainer}>
-        <Button type="submit" disabled={!isValid}>
-          Изменить
+        <Button type="submit" disabled={isDisabled || isSubmitting}>
+          {isSubmitting ? <Spinner size="sm" color="#ffffff" /> : "Изменить"}
         </Button>
         <p className={styles.updatedAt}>{dateMessage}</p>
       </div>
