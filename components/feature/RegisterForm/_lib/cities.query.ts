@@ -22,16 +22,25 @@ const citiesSchema = z
 export type CityOption = { value: string; label: string };
 
 export async function GetCitiesOptions(): Promise<CityOption[]> {
-    const res = await fetch(`${apiUrl}/cities`);
-    const cities = await res.json();
+    try {
+        const res = await fetch(`${apiUrl}/cities`);
 
-    const parsed = citiesSchema.safeParse(cities);
+        if (!res.ok) {
+            console.error(`Failed to fetch cities: ${res.status} ${res.statusText}`);
+            return [];
+        }
 
-    if (!parsed.success) {
-        console.error(parsed.error);
-        return []; // или бросить ошибку, или вернуть default
+        const cities = await res.json();
+        const parsed = citiesSchema.safeParse(cities);
+
+        if (!parsed.success) {
+            console.error(parsed.error);
+            return [];
+        }
+
+        return parsed.data;
+    } catch (error) {
+        console.error('GetCitiesOptions error:', error);
+        return [];
     }
-
-    // здесь parsed.data гарантированно: { value; label }[]
-    return parsed.data;
 }
