@@ -7,7 +7,6 @@ import { FormRow } from "../ui";
 
 import styles from "./input.module.scss";
 
-
 type PhoneFieldProps = {
   label: string;
   value?: string;

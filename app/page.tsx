@@ -1,9 +1,9 @@
-import { FormTitle } from "@/app/_components/FormTitle";
-import RegisterForm from "@/components/feature/RegisterForm";
+import { FormTitle } from "@/components/widgets/FormTitle";
+import RegisterForm from "@/components/features/RegisterForm";
 import {
   CityOption,
   GetCitiesOptions,
-} from "@/components/feature/RegisterForm/_lib/cities.query";
+} from "@/components/shared/api/cities.query";
 
 import styles from "./page.module.scss";
 

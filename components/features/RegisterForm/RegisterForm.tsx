@@ -2,18 +2,19 @@
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { isRequiredField } from "@/utils/IsFieldRequired";
+import { isRequiredField } from "@/components/shared/lib/isFieldRequired";
 import {
   CheckboxField,
   PhoneField,
   SelectField,
   TextField,
-} from "@/components/common";
+} from "@/components/shared/common";
+
+import { type CityOption } from "../../shared/api/cities.query";
 
 import styles from "./RegisterForm.module.scss";
 import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";
 import { FormFooter } from "./_components/FormFooter";
-import { type CityOption } from "./_lib/cities.query";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 

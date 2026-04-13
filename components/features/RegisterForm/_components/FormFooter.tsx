@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button } from "@/components/ui";
+import { Button } from "@/components/shared/ui";
 
 import styles from "./FormFooter.module.scss";
 type FormFooterProps = {

@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 
-import { AppSelect, FormRow } from "@/components/ui";
+import { AppSelect, FormRow } from "@/components/shared/ui";
 
 import styles from "./input.module.scss";
 
