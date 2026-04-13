@@ -21,7 +21,7 @@ const citiesSchema = z
 
 export type CityOption = { value: string; label: string };
 
-export async function GetCitiesOptions(): Promise<CityOption[]> {
+export async function getCitiesOptions(): Promise<CityOption[]> {
     try {
         const res = await fetch(`${apiUrl}/cities`);
 
