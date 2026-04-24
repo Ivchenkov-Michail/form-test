@@ -1,7 +1,7 @@
 @use "@/styles/variables" as *;
 
 .page {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   padding: 40px 24px;
   background: #ffffff;
   display: flex;
