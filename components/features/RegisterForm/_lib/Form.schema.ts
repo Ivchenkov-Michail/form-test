@@ -1,5 +1,7 @@
 import z from "zod";
 
+const nameRegex = /^[а-яёА-ЯЁ]+$/u
+const passwordRegex = /^[a-zA-Z]+$/u
 const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
 
 const formSchema = z
@@ -7,6 +9,7 @@ const formSchema = z
         name: z
             .string()
             .trim()
+            .regex(nameRegex, "Имя должно состоять только из кириллицы")
             .min(2, "Имя должно быть не короче 2 символов")
             .max(50, "Имя не должно быть длиннее 50 символов"),
 
@@ -34,7 +37,8 @@ const formSchema = z
         password: z
             .string()
             .min(1, "Укажите пароль")
-            .min(8, "Пароль должен быть не короче 8 символов")
+            .regex(passwordRegex, "Пароль должен состоять только из латинских символов")
+            .min(6, "Пароль должен быть не короче 6 символов")
             .max(128, "Пароль не должен быть длиннее 128 символов"),
 
         confirm_password: z
