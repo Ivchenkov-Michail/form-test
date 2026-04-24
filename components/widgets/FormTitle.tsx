@@ -1,22 +1,13 @@
 "use client";
-import { useState } from "react";
+
+import { getRegisterMeta } from "../features/RegisterForm/_api/register.storage";
 
 import styles from "./FormTitle.module.scss";
 
+
 export function FormTitle() {
-  const [name, setName] = useState(() => {
-    if (typeof window === "undefined") return "";
-
-    const raw = localStorage.getItem("register");
-    if (!raw) return "";
-
-    try {
-      const data = JSON.parse(raw);
-      return typeof data.name === "string" ? data.name : "";
-    } catch {
-      return "Человек";
-    }
-  });
+  const meta = getRegisterMeta();
+  const name = meta && meta.name ? meta.name : "Человек";
   return (
     <h1 className={styles.title}>
       Здравствуйте, <span>{name}</span>
