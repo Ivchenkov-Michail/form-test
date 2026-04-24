@@ -1,6 +1,7 @@
-import { useState } from "react";
 
 import { Button, Spinner } from "@/components/shared/ui";
+
+import { getRegisterMeta } from "../_api/register.storage";
 
 import styles from "./FormFooter.module.scss";
 type FormFooterProps = {
@@ -9,19 +10,9 @@ type FormFooterProps = {
 };
 
 export function FormFooter({ isDisabled, isSubmitting }: FormFooterProps) {
-  const [dateMessage] = useState(() => {
-    if (typeof window === "undefined") return "";
+  const meta = getRegisterMeta();
+  const dateMessage = meta && meta.date ? meta.date : null;
 
-    const raw = localStorage.getItem("register");
-    if (!raw) return "";
-
-    try {
-      const data = JSON.parse(raw);
-      return typeof data.date === "string" ? data.date : "";
-    } catch {
-      return "";
-    }
-  });
   return (
     <div className={styles.footer}>
       <span />
@@ -29,7 +20,7 @@ export function FormFooter({ isDisabled, isSubmitting }: FormFooterProps) {
         <Button type="submit" disabled={isDisabled || isSubmitting}>
           {isSubmitting ? <Spinner size="sm" color="#ffffff" /> : "Изменить"}
         </Button>
-        <p className={styles.updatedAt}>{dateMessage}</p>
+        {dateMessage && <p className={styles.updatedAt}>{dateMessage}</p>}
       </div>
     </div>
   );
