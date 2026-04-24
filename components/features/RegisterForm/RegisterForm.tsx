@@ -1,6 +1,7 @@
 "use client";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 
 import { isRequiredField } from "@/components/shared/lib/isFieldRequired";
 import {
@@ -40,8 +41,10 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
       await registerUser(submitData);
       saveRegisterMeta(submitData.name);
       reset();
+      toast.success("Форма успешно отправлена!");
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
+      toast.error("Ошибка отправки формы!");
     }
   };
 
