@@ -1,36 +1,210 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Form Test Project
 
-## Getting Started
+A frontend test assignment for a Frontend Developer position.
 
-First, run the development server:
+This project implements a registration form with validation, server-side data fetching, and submission to a mock backend API.
+
+---
+
+# 🚀 Tech Stack
+
+## Frontend
+
+- Next.js (App Router)
+- React 19
+- TypeScript
+- React Hook Form
+- Zod (validation + type inference)
+- React Select
+- React IMask
+- React Toastify
+- SCSS (CSS Modules)
+
+## Backend (mock)
+
+- Node.js
+- Express
+
+## Infrastructure
+
+- Docker
+- Docker Compose
+
+---
+
+# 📦 Installation and Setup
+
+## Using Docker (recommended)
+
+### Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+./cli up-dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+./cli up-prod
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Stop containers
 
-## Learn More
+```bash
+./cli down-dev
+./cli down-prod
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Without Docker
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Frontend
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Backend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+cd backend
+npm install
+node index.js
+```
+
+---
+
+# 🌐 Application URLs
+
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:4000](http://localhost:4000)
+
+---
+
+# ⚙️ Environment Variables
+
+Example `.env` file:
+
+```env
+NEXT_PUBLIC_BACKEND_API_URL_SERVER=http://api:4000
+NEXT_PUBLIC_BACKEND_API_URL_CLIENT=http://127.0.0.1:4000
+```
+
+---
+
+# 🧩 Project Architecture
+
+## Frontend structure
+
+```
+components/
+  features/        # business features (RegisterForm)
+  shared/          # reusable components and utilities
+    ui/            # base UI components
+    common/        # form wrappers
+    api/           # API calls
+    lib/           # utilities
+  widgets/         # composition-level components
+```
+
+### Key principles
+
+- Separation of concerns
+- Component reusability
+- Feature-based structure
+- Type safety via Zod
+
+---
+
+## Backend structure
+
+A minimal Express server used as a mock API:
+
+- `GET /cities` — returns a list of cities
+- `POST /register` — accepts form data
+
+---
+
+# 🧠 Key Decisions
+
+## 1. Form Validation
+
+Built with:
+
+- React Hook Form
+- Zod
+
+---
+
+## 2. Server-Side Data Fetching
+
+Cities are fetched on the server using Next.js:
+
+- Reduces client-side requests
+- Improves initial render performance
+
+---
+
+## 3. UI Abstractions
+
+Reusable form components:
+
+- TextField
+- SelectField
+- PhoneField
+- CheckboxField
+
+---
+
+## 4. UX Improvements
+
+- Disabled submit button when form is invalid
+- Loading indicator during submission
+- Toast notifications
+- Local storage for user name persistence
+
+---
+
+# 📡 API
+
+## GET /cities
+
+Returns a filtered and sorted list of cities.
+
+## POST /register
+
+Accepts form payload:
+
+```json
+{
+  "name": "string",
+  "town": "string",
+  "email": "string",
+  "phone_number": "string",
+  "password": "string",
+  "subscribe_to_updates_by_email": true
+}
+```
+
+---
+
+# 🧪 Linting and Quality
+
+- ESLint (Next.js config)
+- lint-staged
+- Husky (pre-commit hooks)
+
+---
+
+# 🐳 Docker
+
+The project supports two modes:
+
+- Development (with hot reload)
+- Production (optimized build)
+
+Multi-stage builds are used to reduce image size.
+
+---
