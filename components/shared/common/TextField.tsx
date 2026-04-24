@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { FormRow } from "../ui";
+import { FormRow } from "@/components/shared/ui";
 
 import styles from "./input.module.scss";
 

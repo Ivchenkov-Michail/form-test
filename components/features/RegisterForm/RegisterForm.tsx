@@ -10,8 +10,7 @@ import {
   SelectField,
   TextField,
 } from "@/components/shared/common";
-
-import { type CityOption } from "../../shared/api/cities.query";
+import { type CityOption } from "@/components/shared/api/cities.query";
 
 import styles from "./RegisterForm.module.scss";
 import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";

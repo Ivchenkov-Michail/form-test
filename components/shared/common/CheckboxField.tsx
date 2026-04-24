@@ -1,7 +1,6 @@
 "use client";
 
-import { AppCheckbox } from "../ui/AppCheckbox";
-import { FormRow } from "../ui";
+import { AppCheckbox, FormRow } from "@/components/shared/ui";
 
 type CheckboxFieldProps = {
   label: string;
