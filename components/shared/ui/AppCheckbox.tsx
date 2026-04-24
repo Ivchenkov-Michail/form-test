@@ -51,7 +51,7 @@ export const AppCheckbox = forwardRef<HTMLInputElement, AppCheckboxProps>(
     return (
       <label className={styles.checkboxWrapper} htmlFor={id}>
         <input
-          checked
+          checked={checked}
           ref={ref}
           type="checkbox"
           className={clsx(styles.checkbox, className)}
