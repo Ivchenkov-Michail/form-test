@@ -2,12 +2,12 @@
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+import dynamic from "next/dynamic";
 
 import { isRequiredField } from "@/components/shared/lib/isFieldRequired";
 import {
   CheckboxField,
   PhoneField,
-  SelectField,
   TextField,
 } from "@/components/shared/common";
 import { type CityOption } from "@/components/shared/api/cities.query";
@@ -17,6 +17,14 @@ import { FormInput, formSchema, FormValues } from "./_lib/Form.schema";
 import { FormFooter } from "./_components/FormFooter";
 import { registerUser } from "./_api/register.mutation";
 import { saveRegisterMeta } from "./_api/register.storage";
+
+const SelectField = dynamic(
+  () =>
+    import("@/components/shared/common/SelectField").then((m) => m.SelectField),
+  {
+    ssr: false,
+  },
+);
 
 export function RegisterForm({ cities }: { cities: CityOption[] }) {
   const {
@@ -61,6 +69,7 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
         control={control}
         render={({ field }) => (
           <SelectField
+            id={"town-select"}
             label="Ваш город"
             required={isRequiredField(formSchema, "town")}
             error={errors.town?.message}

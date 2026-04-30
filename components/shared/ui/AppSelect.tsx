@@ -11,17 +11,20 @@ type AppSelectProps<
   Option,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>,
-> = Props<Option, IsMulti, Group>;
+> = Props<Option, IsMulti, Group> & {
+  id: string | undefined;
+};
 
 export function AppSelect<
   Option,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>,
->(props: AppSelectProps<Option, IsMulti, Group>) {
+>({ id, ...props }: AppSelectProps<Option, IsMulti, Group>) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   return (
     <Select<Option, IsMulti, Group>
+      id={id}
       {...props}
       components={{
         IndicatorSeparator: () => null,

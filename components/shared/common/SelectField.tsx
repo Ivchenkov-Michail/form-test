@@ -12,6 +12,7 @@ export type SelectOption = {
 };
 
 type SelectFieldProps = {
+  id: string;
   label: string;
   options: SelectOption[];
   value: SelectOption | null;
@@ -23,6 +24,7 @@ type SelectFieldProps = {
 };
 
 export function SelectField({
+  id,
   label,
   options,
   value,
@@ -35,6 +37,7 @@ export function SelectField({
   return (
     <FormRow label={label} isRequired={required}>
       <AppSelect<SelectOption, false>
+        id={id}
         options={options}
         value={value}
         onChange={onChange}

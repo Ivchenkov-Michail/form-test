@@ -1,3 +1,5 @@
+"use client"
+
 const REGISTER_STORAGE_KEY = "register";
 
 type RegisterStorageData = {
