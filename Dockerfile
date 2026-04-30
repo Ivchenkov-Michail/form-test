@@ -7,6 +7,12 @@ RUN npm ci
 
 FROM base AS builder
 WORKDIR /app
+
+ARG NEXT_PUBLIC_BACKEND_API_URL_CLIENT
+ENV NEXT_PUBLIC_BACKEND_API_URL_CLIENT=$NEXT_PUBLIC_BACKEND_API_URL_CLIENT
+
+ENV NEXT_PUBLIC_BACKEND_API_URL_SERVER=http://api:4000
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build

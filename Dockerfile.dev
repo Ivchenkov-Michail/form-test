@@ -7,6 +7,8 @@ RUN npm ci
 
 COPY . .
 
+ENV NEXT_PUBLIC_BACKEND_API_URL_SERVER=http://api:4000
+
 ENV NODE_ENV=development
 ENV PORT=3000
 
