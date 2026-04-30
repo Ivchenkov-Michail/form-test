@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 
 import { Button, Spinner } from "@/components/shared/ui";
 
@@ -10,8 +12,12 @@ type FormFooterProps = {
 };
 
 export function FormFooter({ isDisabled, isSubmitting }: FormFooterProps) {
-  const meta = getRegisterMeta();
-  const dateMessage = meta && meta.date ? meta.date : null;
+  const [dateMessage, setDateMessage] = useState<null | string>(null);
+
+  useEffect(() => {
+    const meta = getRegisterMeta();
+    if (meta && meta.date) setDateMessage(meta.date);
+  }, []);
 
   return (
     <div className={styles.footer}>
