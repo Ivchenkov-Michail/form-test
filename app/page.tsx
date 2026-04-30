@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { FormTitle } from "@/components/widgets/FormTitle";
 import RegisterForm from "@/components/features/RegisterForm";
 import {
