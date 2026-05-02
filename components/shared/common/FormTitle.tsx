@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { getRegisterMeta } from "../features/RegisterForm/_api/register.storage";
+import { getRegisterMeta } from "@/components/features/RegisterForm/_api/register.storage";
 
 import styles from "./FormTitle.module.scss";
 

@@ -1,21 +1,17 @@
 export const dynamic = "force-dynamic";
 
-import { FormTitle } from "@/components/widgets/FormTitle";
-import RegisterForm from "@/components/features/RegisterForm";
-import {
-  CityOption,
-  getCitiesOptions,
-} from "@/components/shared/api/cities.query";
+import { FormTitle } from "@/components/shared/common";
+import { RegisterFormWidget } from "@/components/widgets/RegisterFormWidget";
+
 
 import styles from "./page.module.scss";
 
 export default async function Home() {
-  const cities: CityOption[] = await getCitiesOptions();
   return (
     <main className={styles.page}>
       <section className={styles.card}>
         <FormTitle />
-        <RegisterForm cities={cities ?? []} />
+            <RegisterFormWidget />
       </section>
     </main>
   );
