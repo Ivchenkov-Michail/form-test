@@ -61,9 +61,9 @@ The repository is monolithic, split into:
 
 1. Install:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 2. Copy the environment example:
 
