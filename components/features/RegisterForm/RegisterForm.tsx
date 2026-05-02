@@ -24,6 +24,7 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
     control,
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid, isSubmitting },
   } = useForm<FormInput, unknown, FormValues>({
     resolver: zodResolver(formSchema),
@@ -32,7 +33,7 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
       town: "",
     },
   });
-
+  const subscribe_to_updates_by_email = watch("subscribe_to_updates_by_email");
   const onSubmit = async (data: FormValues) => {
     const { confirm_password: _, ...submitData } = data;
 
@@ -81,7 +82,6 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
         type="password"
         {...register("password")}
       />
-
       <TextField
         label="Пароль еще раз"
         required={isRequiredField(formSchema, "confirm_password")}
@@ -90,9 +90,7 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
         type="password"
         {...register("confirm_password")}
       />
-
       <div className={styles.separator} />
-
       <Controller
         name="phone_number"
         control={control}
@@ -109,15 +107,13 @@ export function RegisterForm({ cities }: { cities: CityOption[] }) {
           />
         )}
       />
-
       <TextField
         label="Электронная почта"
-        required={isRequiredField(formSchema, "email")}
+        required={subscribe_to_updates_by_email}
         error={errors.email?.message}
         placeholder="ivchenkov.michail2005@gmail.com"
         {...register("email")}
       />
-
       <Controller
         name="subscribe_to_updates_by_email"
         control={control}

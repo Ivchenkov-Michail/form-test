@@ -1,7 +1,7 @@
 import z from "zod";
 
-const nameRegex = /^[а-яёА-ЯЁ]+$/u
-const passwordRegex = /^[a-zA-Z]+$/u
+const nameRegex = /^[а-яёА-ЯЁ]+$/u;
+const passwordRegex = /^[a-zA-Z]+$/u;
 const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
 
 const formSchema = z
@@ -21,8 +21,9 @@ const formSchema = z
         email: z
             .string()
             .trim()
-            .min(1, "Email обязателен")
-            .email("Введите корректный email"),
+            .email("Введите корректный email")
+            .optional()
+            .or(z.literal("")),
 
         phone_number: z
             .string()
@@ -31,8 +32,7 @@ const formSchema = z
             .optional()
             .or(z.literal("")),
 
-        subscribe_to_updates_by_email: z
-            .boolean().default(false),
+        subscribe_to_updates_by_email: z.boolean().default(false),
 
         password: z
             .string()
@@ -45,9 +45,24 @@ const formSchema = z
             .string()
             .min(1, "Подтвердите пароль"),
     })
-    .refine((data) => data.password === data.confirm_password, {
-        message: "Пароли не совпадают",
-        path: ["confirm_password"],
+    .superRefine((data, ctx) => {
+        if (data.password !== data.confirm_password) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Пароли не совпадают",
+                path: ["confirm_password"],
+            });
+        }
+
+        if (data.subscribe_to_updates_by_email) {
+            if (!data.email || data.email.trim() === "") {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "Email обязателен при подписке на рассылку",
+                    path: ["email"],
+                });
+            }
+        }
     });
 
 type FormInput = z.input<typeof formSchema>;
