@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { Button, Spinner } from "@/components/shared/ui";
+import { Button, Loader } from "@/components/shared/ui";
 
 import { getRegisterMeta } from "../_api/register.storage";
 
@@ -24,7 +24,7 @@ export function FormFooter({ isDisabled, isSubmitting }: FormFooterProps) {
       <span />
       <div className={styles.footerContainer}>
         <Button type="submit" disabled={isDisabled || isSubmitting}>
-          {isSubmitting ? <Spinner size="sm" color="#ffffff" /> : "Изменить"}
+          {isSubmitting ? <Loader size="sm" color="#ffffff" /> : "Изменить"}
         </Button>
         {dateMessage && <p className={styles.updatedAt}>{dateMessage}</p>}
       </div>

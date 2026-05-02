@@ -1,0 +1,40 @@
+@use "@/styles/variables" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  color: $secondary-text-color-1;
+}
+
+.image {
+  display: block;
+  width: 500px;
+  height: 500px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.button {
+  margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 26px;
+  }
+  .wrapper {
+    justify-content: space-between;
+  }
+  .image {
+    max-width: calc(100vw - 48px);
+    max-height: calc(100vw - 48px);
+  }
+}

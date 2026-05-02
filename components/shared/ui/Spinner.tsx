@@ -1,29 +1,11 @@
-import { CSSProperties } from "react";
-import clsx from "clsx";
-
 import styles from "./Spinner.module.scss";
 
-type SpinnerProps = {
-  className?: string;
-  size?: "sm" | "md" | "lg";
-  color?: string;
-};
-
-export function Spinner({ className, size = "md", color }: SpinnerProps) {
-  const cssVars = {
-    "--spinner-color": color,
-  } as CSSProperties;
-
+export function Spinner() {
   return (
-    <div
-      className={clsx(styles.spinner, styles[size], className)}
-      style={cssVars}
-      aria-label="Загрузка"
-      role="status"
-    >
-      <div className={styles.bounce1} />
-      <div className={styles.bounce2} />
-      <div className={styles.bounce3} />
+    <div className={styles.wrapper}>
+      <svg viewBox="25 25 50 50" className={styles.body}>
+        <circle r="20" cy="50" cx="50" className={styles.circle}></circle>
+      </svg>
     </div>
   );
 }

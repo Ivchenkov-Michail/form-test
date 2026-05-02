@@ -1,57 +1,45 @@
-@use "@/styles/variables" as *;
-
-.spinner {
-  --spinner-color: #{$secondary-text-color-1};
-
-  display: inline-flex;
+.wrapper {
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  text-align: center;
 }
 
-.spinner > div {
-  border-radius: 50%;
-  display: inline-block;
-  background-color: var(--spinner-color);
-  animation: bouncedelay 1.4s infinite ease-in-out both;
+.body {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
 }
 
-.sm > div {
-  width: 8px;
-  height: 8px;
+.circle {
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
 }
 
-.md > div {
-  width: 12px;
-  height: 12px;
-}
-
-.lg > div {
-  width: 16px;
-  height: 16px;
-}
-
-.bounce1 {
-  animation-delay: -0.32s;
-}
-
-.bounce2 {
-  animation-delay: -0.16s;
-}
-
-.bounce3 {
-  animation-delay: 0s;
-}
-
-@keyframes bouncedelay {
-  0%,
-  80%,
+@keyframes rotate4 {
   100% {
-    transform: scale(0);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
   }
 
-  40% {
-    transform: scale(1);
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
   }
 }

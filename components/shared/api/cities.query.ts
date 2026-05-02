@@ -26,21 +26,19 @@ export async function getCitiesOptions(): Promise<CityOption[]> {
         const res = await fetch(`${apiUrl}/cities`);
 
         if (!res.ok) {
-            console.error(`Failed to fetch cities: ${res.status} ${res.statusText}`);
-            return [];
+            throw Error(`Failed to fetch cities: ${res.status} ${res.statusText}`);
         }
 
         const cities = await res.json();
         const parsed = citiesSchema.safeParse(cities);
 
         if (!parsed.success) {
-            console.error(parsed.error);
-            return [];
+            throw Error(parsed.error.message);
         }
 
         return parsed.data;
     } catch (error) {
         console.error('GetCitiesOptions error:', error);
-        return [];
+        throw Error(`GetCitiesOptions error: ${error}`)
     }
 }
