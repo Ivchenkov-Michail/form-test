@@ -24,7 +24,7 @@ export function AppSelect<
 
   return (
     <Select<Option, IsMulti, Group>
-      id={id}
+      instanceId={id}
       {...props}
       components={{
         IndicatorSeparator: () => null,

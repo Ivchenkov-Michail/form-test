@@ -17,8 +17,9 @@
   min-height: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  & > :first-child {
-    padding: 0px;
+
+  & > :global(.css-hlgwow) {
+    padding: 0px !important;
   }
 }
 .dropdownIndicator {
